@@ -25,7 +25,7 @@ app.post('/clip', async (req, res) => {
       writer.on('error', reject);
     });
 
-    const cmd = `ffmpeg -y -i ${inputPath} -ss ${start} -to ${end} -c copy ${outputPath}`;
+    const cmd = `ffmpeg -y -i ${inputPath} -ss ${start} -to ${end} -c:v libx264 -c:a aac ${outputPath}`;
     console.log(`Running: ${cmd}`);
     await new Promise((resolve, reject) => {
       exec(cmd, (error) => {
